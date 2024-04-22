@@ -4,7 +4,7 @@
  *
  * @module
  */
-import { PluginListener } from "@tauri-apps/api/core";
+import { type PluginListener } from "@tauri-apps/api/core";
 /**
  * Options to send a notification.
  *
@@ -93,9 +93,7 @@ interface Options {
     /**
      * Extra payload to store in the notification.
      */
-    extra?: {
-        [key: string]: unknown;
-    };
+    extra?: Record<string, unknown>;
     /**
      * If true, the notification cannot be dismissed by the user on Android.
      *
@@ -121,7 +119,7 @@ interface Options {
      */
     number?: number;
 }
-type ScheduleInterval = {
+interface ScheduleInterval {
     year?: number;
     month?: number;
     day?: number;
@@ -138,7 +136,7 @@ type ScheduleInterval = {
     hour?: number;
     minute?: number;
     second?: number;
-};
+}
 declare enum ScheduleEvery {
     Year = "year",
     Month = "month",
@@ -386,10 +384,10 @@ declare function active(): Promise<ActiveNotification[]>;
  *
  * @since 2.0.0
  */
-declare function removeActive(notifications: {
+declare function removeActive(notifications: Array<{
     id: number;
     tag?: string;
-}[]): Promise<void>;
+}>): Promise<void>;
 /**
  * Removes all active notifications.
  *

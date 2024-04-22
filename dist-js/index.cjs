@@ -74,9 +74,9 @@ exports.Visibility = void 0;
  */
 async function isPermissionGranted() {
     if (window.Notification.permission !== "default") {
-        return Promise.resolve(window.Notification.permission === "granted");
+        return await Promise.resolve(window.Notification.permission === "granted");
     }
-    return core.invoke("plugin:notification|is_permission_granted");
+    return await core.invoke("plugin:notification|is_permission_granted");
 }
 /**
  * Requests the permission to send notifications.
@@ -95,7 +95,7 @@ async function isPermissionGranted() {
  * @since 2.0.0
  */
 async function requestPermission() {
-    return window.Notification.requestPermission();
+    return await window.Notification.requestPermission();
 }
 /**
  * Sends a notification to the user.
@@ -145,7 +145,7 @@ function sendNotification(options) {
  * @since 2.0.0
  */
 async function registerActionTypes(types) {
-    return core.invoke("plugin:notification|register_action_types", { types });
+    await core.invoke("plugin:notification|register_action_types", { types });
 }
 /**
  * Retrieves the list of pending notifications.
@@ -161,7 +161,7 @@ async function registerActionTypes(types) {
  * @since 2.0.0
  */
 async function pending() {
-    return core.invoke("plugin:notification|get_pending");
+    return await core.invoke("plugin:notification|get_pending");
 }
 /**
  * Cancels the pending notifications with the given list of identifiers.
@@ -177,7 +177,7 @@ async function pending() {
  * @since 2.0.0
  */
 async function cancel(notifications) {
-    return core.invoke("plugin:notification|cancel", { notifications });
+    await core.invoke("plugin:notification|cancel", { notifications });
 }
 /**
  * Cancels all pending notifications.
@@ -193,7 +193,7 @@ async function cancel(notifications) {
  * @since 2.0.0
  */
 async function cancelAll() {
-    return core.invoke("plugin:notification|cancel");
+    await core.invoke("plugin:notification|cancel");
 }
 /**
  * Retrieves the list of active notifications.
@@ -209,7 +209,7 @@ async function cancelAll() {
  * @since 2.0.0
  */
 async function active() {
-    return core.invoke("plugin:notification|get_active");
+    return await core.invoke("plugin:notification|get_active");
 }
 /**
  * Removes the active notifications with the given list of identifiers.
@@ -225,7 +225,7 @@ async function active() {
  * @since 2.0.0
  */
 async function removeActive(notifications) {
-    return core.invoke("plugin:notification|remove_active", { notifications });
+    await core.invoke("plugin:notification|remove_active", { notifications });
 }
 /**
  * Removes all active notifications.
@@ -241,7 +241,7 @@ async function removeActive(notifications) {
  * @since 2.0.0
  */
 async function removeAllActive() {
-    return core.invoke("plugin:notification|remove_active");
+    await core.invoke("plugin:notification|remove_active");
 }
 /**
  * Creates a notification channel.
@@ -264,7 +264,7 @@ async function removeAllActive() {
  * @since 2.0.0
  */
 async function createChannel(channel) {
-    return core.invoke("plugin:notification|create_channel", { ...channel });
+    await core.invoke("plugin:notification|create_channel", { ...channel });
 }
 /**
  * Removes the channel with the given identifier.
@@ -280,7 +280,7 @@ async function createChannel(channel) {
  * @since 2.0.0
  */
 async function removeChannel(id) {
-    return core.invoke("plugin:notification|delete_channel", { id });
+    await core.invoke("plugin:notification|delete_channel", { id });
 }
 /**
  * Retrieves the list of notification channels.
@@ -296,13 +296,13 @@ async function removeChannel(id) {
  * @since 2.0.0
  */
 async function channels() {
-    return core.invoke("plugin:notification|listChannels");
+    return await core.invoke("plugin:notification|listChannels");
 }
 async function onNotificationReceived(cb) {
-    return core.addPluginListener("notification", "notification", cb);
+    return await core.addPluginListener("notification", "notification", cb);
 }
 async function onAction(cb) {
-    return core.addPluginListener("notification", "actionPerformed", cb);
+    return await core.addPluginListener("notification", "actionPerformed", cb);
 }
 
 exports.Schedule = Schedule;
